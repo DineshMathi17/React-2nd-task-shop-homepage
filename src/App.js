@@ -117,7 +117,19 @@ function App() {
 
 export default App;
 
-function Cards({ prod, idx }) {
+function Cards({ prod, idx, setCount, count }) {
+
+  const [show, setShow] = useState(false);
+
+  function addToCart() {
+    setShow(!show)
+    setCount(count + 1)
+  }
+
+  function removeFromCart() {
+    setShow(!show)
+    setCount(count - 1)
+  }
 
 
   return (
@@ -144,8 +156,21 @@ function Cards({ prod, idx }) {
 
         {prod.view < 0 ? <Button
           variant="primary"
-        >Add to cart</Button> : ""}
+        >{!show ? <Button
+          variant="primary"
+          onClick={addToCart}
+        >Add cart</Button> : ""}
+
+
+        {show ? <Button
+          variant="danger"
+          onClick={removeFromCart}
+        >remove cart</Button> : ""}</Button> : ""}
+
+
         
+
+
       </Card.Body>
     </Card>
   )
